@@ -25,12 +25,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     var name by rememberSaveable { mutableStateOf("") }
                     var lastName by rememberSaveable { mutableStateOf("") }
-                    MyTextFieldOutlined(
-                        name = name,
-                        lastName = lastName,
-                        onNameChange = { name = it },
-                        onLastNameChange = { lastName = it }
-                    )
+                    MyCustomAdvancedProgressBar()
                 }
             }
         }
