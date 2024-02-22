@@ -79,11 +79,6 @@ fun MyRangeSlider() {
     }
 }
 
-enum class Orientation {
-    PORTRAIT,
-    LANDSCAPE
-}
-
 @Preview(showBackground = true)
 @Composable
 fun MySliderPreview() {
