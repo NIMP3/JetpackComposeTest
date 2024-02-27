@@ -3,6 +3,7 @@ package dev.yovany.jcudemy
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,63 +25,56 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MyImage() {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "My image",
-            alpha = 0.5f,
-            modifier = Modifier.background(Color(0xFF18B3AE))
-        )
-    }
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        contentDescription = "My image",
+        alpha = 0.5f,
+        modifier = Modifier.background(Color(0xFF18B3AE))
+    )
 }
 
 @Composable
 fun MyImageAdvanced() {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "My image",
-            alpha = 0.5f,
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(256.dp)
-                .border(2.dp, Color.White, CircleShape)
-                .background(Color(0xFF18B3AE))
-        )
-    }
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        contentDescription = "My image",
+        alpha = 0.5f,
+        modifier = Modifier
+            .clip(CircleShape)
+            .size(128.dp)
+            .border(2.dp, Color.White, CircleShape)
+            .background(Color(0xFF18B3AE))
+    )
 }
 
 @Composable
 fun MyIcon() {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
+    Icon(
+        imageVector = Icons.Default.FavoriteBorder,
+        contentDescription = "My icon",
+        tint = Color.Red,
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .size(48.dp)
+            .background(Color(0xFFFFECEB))
+    )
+}
+
+@Composable
+fun MyCustomImageScreen() {
+    Column(
+        Modifier.fillMaxSize().padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
     ) {
-        Icon(
-            imageVector = Icons.Default.FavoriteBorder,
-            contentDescription = "My icon",
-            tint = Color.Red,
-            modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .size(48.dp)
-                .background(Color(0xFFFFECEB))
-        )
+        MyImage()
+        MyImageAdvanced()
+        MyIcon()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MyImagePreview() {
-    MyIcon()
+fun MyCustomImagePreview() {
+    MyCustomImageScreen()
 }

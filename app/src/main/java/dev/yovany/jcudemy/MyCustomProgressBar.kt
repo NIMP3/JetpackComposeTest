@@ -36,9 +36,6 @@ fun MyCustomProgressBar() {
     var showLoading by rememberSaveable { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -69,9 +66,6 @@ fun MyCustomProgressBar() {
 fun MyCustomAdvancedProgressBar() {
     var progress by rememberSaveable { mutableStateOf(0f) }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -93,7 +87,10 @@ fun MyCustomAdvancedProgressBar() {
 
         Spacer(modifier = Modifier.padding(top = 16.dp))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             Button(
                 onClick = { if (progress > 0f) progress -= 0.1f },
                 modifier = Modifier.weight(1f)
@@ -112,8 +109,22 @@ fun MyCustomAdvancedProgressBar() {
     }
 }
 
+@Composable
+fun MyCustomProgressBarScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+    ) {
+        MyCustomProgressBar()
+        MyCustomAdvancedProgressBar()
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun MyCustomProgressBarPreview() {
-    MyCustomAdvancedProgressBar()
+    MyCustomProgressBarScreen()
 }

@@ -276,13 +276,19 @@ fun MyButton(
 }
 
 @Composable
-fun MyBox() {
+fun MyCustomDialogScreen() {
     var show by remember { mutableStateOf(false) }
     var showSimpleCustomDialog by remember { mutableStateOf(false) }
     var showAccountDialog by remember { mutableStateOf(false) }
     var showConfirmation by remember { mutableStateOf(false) }
 
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
+    ) {
         MyDialog(show) { show = false }
         MySimpleCustomDialog(showSimpleCustomDialog) { showSimpleCustomDialog = false }
         MyCustomDialog(showAccountDialog) { showAccountDialog = false }
@@ -332,13 +338,5 @@ fun MyBox() {
 @Preview(showBackground = true)
 @Composable
 fun MyDialogPreview() {
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        MyBox()
-    }
+    MyCustomDialogScreen()
 }

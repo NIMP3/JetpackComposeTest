@@ -1,6 +1,7 @@
 package dev.yovany.jcudemy
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -30,7 +32,9 @@ fun MyButtonExample() {
     Column(
         Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
     ) {
         Button(
             onClick = { enabled = !enabled },
@@ -64,7 +68,5 @@ fun MyButtonExample() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultButtonPreview() {
-    JCUdemyTheme {
-        MyButtonExample()
-    }
+    MyButtonExample()
 }
