@@ -1,0 +1,148 @@
+{
+  "title": "Jetpack Compose",
+  "subtitle": "Project to learn Jetpack Compose",
+  "resource": "ic_jetpack_compose",
+  "services" : [
+    {
+      "id": 1,
+      "service": "Components",
+      "description": "This is a description of the service",
+      "resource": "ic_component",
+      "color": "#FF5733",
+      "items" : [
+        {
+          "id": 1,
+          "name": "Text - TexField",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 2,
+          "name": "Button",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 3,
+          "name": "Image",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 4,
+          "name": "Progress Bar",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 5,
+          "name": "Selection components",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 6,
+          "name": "Other components",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 7,
+          "name": "Slider",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 8,
+          "name": "Dialogs",
+          "description": "This is a description of the item"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "service": "Layouts",
+      "description": "This is a description of the service",
+      "resource": "ic_layout",
+      "color": "#FF5733",
+      "items" : [
+        {
+          "id": 1,
+          "name": "App Bar",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 2,
+          "name": "Bottom Navigation",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 3,
+          "name": "Navigation Drawer",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 4,
+          "name": "Tabs",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 5,
+          "name": "Other layouts",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 6,
+          "name": "Recycler View",
+          "description": "This is a description of the item"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "service": "Instagram UI",
+      "description": "This is a description of the service",
+      "resource": "ic_instagram",
+      "color": "#FF5733",
+      "items" : [
+        {
+          "id": 1,
+          "name": "Login",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 2,
+          "name": "Register",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 3,
+          "name": "Forgot Password",
+          "description": "This is a description of the item"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "service": "Twitter UI",
+      "description": "This is a description of the service",
+      "resource": "ic_twitter",
+      "color": "#FF5733",
+      "items" : [
+        {
+          "id": 1,
+          "name": "Login",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 2,
+          "name": "Register",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 3,
+          "name": "Forgot Password",
+          "description": "This is a description of the item"
+        },
+        {
+          "id": 4,
+          "name": "Home",
+          "description": "This is a description of the item"
+        }
+      ]
+    }
+  ]
+}
