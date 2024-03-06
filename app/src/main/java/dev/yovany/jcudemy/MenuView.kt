@@ -82,9 +82,7 @@ fun Menu(menu: Menu, modifier: Modifier = Modifier) {
 @Composable
 fun ServiceView(service: Service) {
     val color: Color = Utility.getColorFromString(service.color)?.let { Color(it) } ?: Color.Black
-    val resource = Utility.getResourceId(LocalContext.current, service.resource, "drawable") ?: R.drawable.ic_default_service
-
-    Log.i("Resource", "Resource: $resource")
+    val resource: Int = Utility.getResourceId(LocalContext.current, service.resource, "drawable") ?: R.drawable.ic_default_service
 
     Card(
         modifier = Modifier

@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "dev.yovany.jcudemy"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.yovany.jcudemy"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -62,6 +62,10 @@ dependencies {
 
     //Gson
     implementation("com.google.code.gson:gson:2.10.1")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.compose.material3:material3-android:1.2.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -1,6 +1,7 @@
 package dev.yovany.jcudemy
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import java.io.IOException
 
@@ -31,6 +32,17 @@ class Utility {
                 if (resource == 0) null else resource
             } catch (e: Exception) {
                 null
+            }
+        }
+
+        fun isValidImageResource(context: Context, resourceId: Int): Boolean {
+            return try {
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeResource(context.resources, resourceId, options)
+                options.outWidth != -1 && options.outHeight != -1
+            } catch (e: Exception) {
+                false
             }
         }
     }

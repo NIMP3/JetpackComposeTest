@@ -55,7 +55,7 @@ data class Menu(
                         3,
                         "Material",
                         "Material Design components",
-                        "ic_material",
+                        "ic_default_service",
                         "#FF018786",
                         listOf(
                             Item(8, "TopAppBar", "A composable that provides a top app bar."),
