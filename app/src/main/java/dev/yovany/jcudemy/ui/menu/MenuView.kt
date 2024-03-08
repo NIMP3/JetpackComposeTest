@@ -21,10 +21,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,27 +36,59 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.yovany.jcudemy.Menu
+import dev.yovany.jcudemy.MessageView
+import dev.yovany.jcudemy.data.Menu
 import dev.yovany.jcudemy.R
-import dev.yovany.jcudemy.Service
+import dev.yovany.jcudemy.data.Service
 import dev.yovany.jcudemy.Utility
+import dev.yovany.jcudemy.data.Message
+import dev.yovany.jcudemy.data.MessageType
+import dev.yovany.jcudemy.data.Resource
 
 
 @Composable
 fun MenuView(dataViewModel: DataViewModel = hiltViewModel()) {
-    var menu by remember { mutableStateOf(Menu.createSimpleMenu()) }
     var showItemsView by remember { mutableStateOf(false) }
-    var service by remember { mutableStateOf<Service>(menu.services.first()) }
+    val menu by dataViewModel.menu.collectAsState()
+    var data by remember { mutableStateOf(Menu()) }
+    var service by remember { mutableStateOf(Service()) }
 
-    LaunchedEffect(Unit) {
-        menu = dataViewModel.getMenu() ?: Menu.createSimpleMenu()
-    }
+    LaunchedEffect(Unit) { dataViewModel.getMenu() }
 
     Column(Modifier.fillMaxSize()) {
-        Header(title = menu.title, subtitle = menu.subtitle, modifier = Modifier.weight(3f))
-        Menu(menu = menu, modifier = Modifier.weight(7f)) {
-            service = it
-            showItemsView = true
+        Header(title = data.title, subtitle = data.subtitle, modifier = Modifier.weight(3f))
+        when (menu) {
+            is Resource.Loading -> {
+                MessageView(
+                    message = Message(
+                        "LOADING",
+                        "Obtaining menu data, please wait...",
+                        MessageType.LOADING
+                    ),
+                    modifier = Modifier.weight(7f)
+                )
+            }
+
+            is Resource.Error -> {
+                MessageView(
+                    message = Message(
+                        "ERROR",
+                        "Error obtaining menu data: ${(menu as Resource.Error).message}",
+                        MessageType.ERROR
+                    ),
+                    modifier = Modifier.weight(7f)
+                )
+            }
+
+            is Resource.Success -> {
+                data = (menu as Resource.Success).data!!
+                Menu(menu = data, modifier = Modifier.weight(7f)) {
+                    service = it
+                    showItemsView = true
+                }
+            }
+
+            else -> {}
         }
     }
 
@@ -67,6 +99,8 @@ fun MenuView(dataViewModel: DataViewModel = hiltViewModel()) {
             onItemClicked = { item -> Log.d("MenuView", "Item clicked: ${item.name}") }
         )
     }
+
+
 }
 
 @Composable

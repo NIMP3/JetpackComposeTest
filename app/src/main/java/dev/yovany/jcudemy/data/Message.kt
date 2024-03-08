@@ -1,4 +1,6 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.data
+
+import dev.yovany.jcudemy.R
 
 data class Message(
     val title: String,

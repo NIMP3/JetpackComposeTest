@@ -1,7 +1,4 @@
-package dev.yovany.jcudemy
-
-import android.content.Context
-import com.google.gson.Gson
+package dev.yovany.jcudemy.data
 
 data class Menu(
     val title: String,
@@ -9,6 +6,8 @@ data class Menu(
     val resource : String,
     val services: List<Service>
 ) {
+    constructor() : this("Jetpack Compose", "Project to learn Jetpack Compose", "", emptyList())
+
     companion object {
         fun createSimpleMenu(): Menu {
             return Menu(
@@ -67,7 +66,9 @@ data class Service(
     val resource: String,
     val color: String,
     val items: List<Item>
-)
+) {
+    constructor() : this(0, "", "", "", "", emptyList())
+}
 
 data class Item(
     val id: Int,
