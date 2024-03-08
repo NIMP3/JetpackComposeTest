@@ -1,4 +1,4 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.menu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -10,9 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -26,13 +27,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yovany.jcudemy.Item
 import dev.yovany.jcudemy.Menu.Companion.createSimpleMenu
+import dev.yovany.jcudemy.R
+import dev.yovany.jcudemy.Service
+import dev.yovany.jcudemy.Utility
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,7 +56,7 @@ fun ItemsView(service: Service, onDismiss: () -> Unit = {}, onItemClicked: (Item
                 .fillMaxWidth()
                 .padding(start= 16.dp, bottom = 32.dp)
         ) {
-            ItemsHeader(title = service.service, subtitle = service.description)
+            ItemsHeader(service = service)
             ItemsList(itemList = service.items) { item ->
                 onItemClicked(item)
                 scope.launch { sheetState.hide() }.invokeOnCompletion {
@@ -64,7 +69,7 @@ fun ItemsView(service: Service, onDismiss: () -> Unit = {}, onItemClicked: (Item
 
 @Composable
 fun ItemsList(itemList: List<Item>, onItemClicked: (Item) -> Unit = {}) {
-    LazyRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    LazyRow(Modifier.fillMaxWidth().padding(end = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         items(itemList) { item ->
             ItemCard(item = item, onItemClicked = onItemClicked)
         }
@@ -79,7 +84,7 @@ fun ItemCard(item: Item, onItemClicked: (Item) -> Unit = {}) {
             .padding( vertical = 12.dp)
             .border(1.dp, Color.DarkGray, RoundedCornerShape(10))
             .clickable { onItemClicked(item) },
-        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
         shape = RoundedCornerShape(10),
         colors = CardDefaults.cardColors(
             contentColor = Color(0xFFFFFFFF),
@@ -103,10 +108,12 @@ fun ItemCard(item: Item, onItemClicked: (Item) -> Unit = {}) {
 
             Text(
                 text = item.name,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleSmall,
                 color = Color.DarkGray,
                 fontWeight = FontWeight.SemiBold,
-                maxLines = 1,
+                maxLines = 2,
+                minLines = 2,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
@@ -115,16 +122,18 @@ fun ItemCard(item: Item, onItemClicked: (Item) -> Unit = {}) {
 }
 
 @Composable
-fun ItemsHeader(title: String, subtitle: String) {
+fun ItemsHeader(service: Service) {
+    val color: Color = Utility.getColorFromString(service.color)?.let { Color(it) } ?: Color.Black
+
     Column(Modifier.padding(bottom = 16.dp)) {
         Text(
-            text = title,
+            text = service.service,
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = color
         )
         Text(
-            text = subtitle,
+            text = service.description,
             style = MaterialTheme.typography.bodyMedium,
             color = Color.Gray
         )
@@ -134,6 +143,6 @@ fun ItemsHeader(title: String, subtitle: String) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ItemsViewPreview() {
-    val service = createSimpleMenu().services.first()
+    val service = createSimpleMenu().services.last()
     ItemsView(service = service)
 }

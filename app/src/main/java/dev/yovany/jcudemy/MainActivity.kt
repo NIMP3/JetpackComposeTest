@@ -13,9 +13,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dev.yovany.jcudemy.core.ContentWrapper
 import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navigationController: NavHostController

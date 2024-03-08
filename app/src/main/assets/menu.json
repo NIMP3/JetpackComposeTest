@@ -7,8 +7,8 @@
       "id": 1,
       "service": "Components",
       "description": "This is a description of the service",
-      "resource": "ic_component",
-      "color": "#FF5733",
+      "resource": "ic_components",
+      "color": "#FF33FF",
       "items" : [
         {
           "id": 1,
@@ -56,8 +56,8 @@
       "id": 2,
       "service": "Layouts",
       "description": "This is a description of the service",
-      "resource": "ic_layout",
-      "color": "#FF5733",
+      "resource": "ic_layouts",
+      "color": "#FF1A33",
       "items" : [
         {
           "id": 1,
@@ -96,7 +96,7 @@
       "service": "Instagram UI",
       "description": "This is a description of the service",
       "resource": "ic_instagram",
-      "color": "#FF5733",
+      "color": "#8134AF",
       "items" : [
         {
           "id": 1,
@@ -120,7 +120,7 @@
       "service": "Twitter UI",
       "description": "This is a description of the service",
       "resource": "ic_twitter",
-      "color": "#FF5733",
+      "color": "#08A0E9",
       "items" : [
         {
           "id": 1,

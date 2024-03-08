@@ -10,16 +10,6 @@ data class Menu(
     val services: List<Service>
 ) {
     companion object {
-        fun getMenuFromJSON(context: Context): Menu? {
-            val jsonFileString = Utility.getJsonDataFromAsset(context,"menu.json")
-            return try {
-                val menu = Gson().fromJson(jsonFileString, Menu::class.java)
-                menu
-            } catch (e: Exception) {
-                null
-            }
-        }
-
         fun createSimpleMenu(): Menu {
             return Menu(
                 "Jetpack Compose",
