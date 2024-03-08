@@ -1,10 +1,9 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Card
@@ -166,11 +164,10 @@ fun MyDropDownMenu() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun OtherComponentsPreview() {
+fun OtherComponentsView() {
     Column(
-        Modifier.fillMaxSize(),
+        Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -179,4 +176,10 @@ fun OtherComponentsPreview() {
         MyDivider()
         MyDropDownMenu()
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OtherComponentsViewPreview() {
+    OtherComponentsView()
 }

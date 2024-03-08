@@ -1,4 +1,4 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.RadioButton
@@ -26,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yovany.jcudemy.CheckInfo
 
 @Composable
 fun MySwitch() {
@@ -175,14 +178,32 @@ fun MyListOfRadioButton() {
     }
 }
 
+@Composable
+fun SelectionControlComponentsView() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment . CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+            ) {
+                MySwitch()
+                Spacer(modifier = Modifier.padding(8.dp))
+                MyCheckBox()
+                Spacer(modifier = Modifier.padding(8.dp))
+                MyCheckBoxWithText()
+                Spacer(modifier = Modifier.padding(8.dp))
+                MyListOfCheckbox()
+                Spacer(modifier = Modifier.padding(8.dp))
+                MyTriStatusCheckbox()
+                Spacer(modifier = Modifier.padding(8.dp))
+                MyListOfRadioButton()
+            }
+}
+
+
 @Preview(showBackground = true)
 @Composable
-fun SelectionControlComponentsPreview() {
-    Column(
-        Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        MyListOfRadioButton()
-    }
+fun SelectionControlComponentsViewPreview() {
+    SelectionControlComponentsView()
 }

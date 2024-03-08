@@ -2,13 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MyDialogPreview">
-        <State />
-      </entry>
-      <entry key="MySliderPreview">
-        <State />
-      </entry>
-      <entry key="SelectionControlComponentsPreview">
+      <entry key="SelectionControlComponentsViewPreview">
         <State />
       </entry>
       <entry key="app">

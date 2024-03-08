@@ -1,6 +1,5 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,14 +16,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 
 @Composable
-fun MyButtonExample() {
+fun CustomButtonView() {
     var enabled by rememberSaveable { mutableStateOf(true) }
     var enabledOutlineButton by rememberSaveable { mutableStateOf(true) }
     var enabledTextButton by rememberSaveable { mutableStateOf(true) }
@@ -68,5 +65,5 @@ fun MyButtonExample() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultButtonPreview() {
-    MyButtonExample()
+    CustomButtonView()
 }

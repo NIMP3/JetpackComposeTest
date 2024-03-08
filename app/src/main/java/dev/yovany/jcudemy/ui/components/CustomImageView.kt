@@ -1,10 +1,9 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yovany.jcudemy.R
 
 @Composable
 fun MyImage() {
@@ -61,7 +61,7 @@ fun MyIcon() {
 }
 
 @Composable
-fun MyCustomImageScreen() {
+fun CustomImageView() {
     Column(
         Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,5 +76,5 @@ fun MyCustomImageScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MyCustomImagePreview() {
-    MyCustomImageScreen()
+    CustomImageView()
 }

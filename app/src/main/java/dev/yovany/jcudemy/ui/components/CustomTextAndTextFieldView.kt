@@ -1,8 +1,10 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -23,11 +25,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 
 @Composable
 fun MyText(text: String) {
-    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxWidth()) {
         Text(text = text)
         Text(text = text, color = Color.Blue)
         Text(text = text, fontWeight = FontWeight.ExtraBold)
@@ -54,19 +55,19 @@ fun MyText(text: String) {
 @Composable
 fun MyTextField() {
     var myText by rememberSaveable { mutableStateOf("") }
-    TextField(value = myText, onValueChange = { myText = it })
+    TextField(value = myText, onValueChange = { myText = it }, modifier = Modifier.fillMaxWidth())
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTextFieldAdvanced() {
     var myText by rememberSaveable { mutableStateOf("") }
-    Column(Modifier.fillMaxSize()) {
-        TextField(
-            value = myText,
-            onValueChange = { myText = if (it.contains("a")) it.replace("a", "") else it },
-            label = { Text(text = "Ingrea tu nombre") })
-    }
+
+    TextField(
+        value = myText,
+        modifier = Modifier.fillMaxWidth(),
+        onValueChange = { myText = if (it.contains("a")) it.replace("a", "") else it },
+        label = { Text(text = "Ingrea tu nombre") })
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +78,7 @@ fun MyTextFieldOutlined(
     onNameChange: (String) -> Unit,
     onLastNameChange: (String) -> Unit
 ) {
-    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(
             value = name,
             onValueChange = onNameChange,
@@ -86,7 +87,9 @@ fun MyTextFieldOutlined(
                 focusedBorderColor = Color.Magenta,
                 unfocusedBorderColor = Color.Black
             ),
-            modifier = Modifier.padding(4.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
         )
         OutlinedTextField(
             value = lastName, onValueChange = onLastNameChange,
@@ -95,15 +98,41 @@ fun MyTextFieldOutlined(
                 focusedBorderColor = Color.Red,
                 unfocusedBorderColor = Color.Gray
             ),
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
         )
+    }
+}
+
+@Composable
+fun MyHorizontalDivider() {
+    Divider(
+        thickness = 1.dp,
+        color = Color.Gray,
+        modifier = Modifier.padding(vertical = 24.dp)
+    )
+}
+
+@Composable
+fun CustomTextAndTextFieldView() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        MyText(text = "Hello Edwin")
+        MyHorizontalDivider()
+        MyTextField()
+        MyHorizontalDivider()
+        MyTextFieldAdvanced()
+        MyHorizontalDivider()
+        MyTextFieldOutlined(name = "", lastName = "", onNameChange = {}, onLastNameChange = {})
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    JCUdemyTheme {
-        MyTextFieldOutlined(name = "", lastName = "", onNameChange = {}, onLastNameChange = {})
-    }
+fun CustomTextAndTextFieldViewPreview() {
+    CustomTextAndTextFieldView()
 }

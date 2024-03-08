@@ -1,4 +1,4 @@
-package dev.yovany.jcudemy
+package dev.yovany.jcudemy.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NavigateBefore
 import androidx.compose.material.icons.filled.NavigateNext
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -110,7 +108,7 @@ fun MyCustomAdvancedProgressBar() {
 }
 
 @Composable
-fun MyCustomProgressBarScreen() {
+fun CustomProgressBarView() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -126,5 +124,5 @@ fun MyCustomProgressBarScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MyCustomProgressBarPreview() {
-    MyCustomProgressBarScreen()
+    CustomProgressBarView()
 }
