@@ -27,7 +27,7 @@ import dev.yovany.jcudemy.data.MessageType
 @Composable
 fun MessageView(message: Message, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.fillMaxSize().background(Color.White),
+        modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -37,21 +37,19 @@ fun MessageView(message: Message, modifier: Modifier = Modifier) {
             LottieAnimation(
                 composition = composition,
                 iterations = LottieConstants.IterateForever,
-                modifier = Modifier.size(48.dp).padding(bottom = 8.dp)
+                modifier = Modifier.size(60.dp).padding(bottom = 8.dp)
             )
 
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
                 maxLines = 1
             )
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Light,
-                color = Color.DarkGray,
                 maxLines = 3)
         }
     }

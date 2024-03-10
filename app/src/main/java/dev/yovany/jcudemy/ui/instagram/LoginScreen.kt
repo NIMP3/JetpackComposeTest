@@ -38,6 +38,8 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DividerDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
@@ -51,7 +53,7 @@ import androidx.compose.ui.unit.sp
 import dev.yovany.jcudemy.R
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(onBackClick: () -> Unit = {}) {
     Box(
         Modifier
             .fillMaxSize()
@@ -60,7 +62,7 @@ fun LoginScreen() {
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(16.dp)
-        )
+        ){ onBackClick() }
         Body(
             Modifier
                 .align(Alignment.Center)
@@ -102,7 +104,7 @@ fun Body(modifier: Modifier) {
 @Composable
 fun Footer(modifier: Modifier, onSignUpClick: () -> Unit = {}) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Divider(
+        HorizontalDivider(
             Modifier
                 .fillMaxWidth()
                 .background(Color(0xFFF9F9F9))
@@ -119,7 +121,6 @@ fun Footer(modifier: Modifier, onSignUpClick: () -> Unit = {}) {
                 "Don't have an account?",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFB5B5B5)
             )
             Text(
                 "Sign Up",
@@ -161,25 +162,14 @@ fun SocialLogin(onSocialLoginClick: () -> Unit) {
 @Composable
 fun LoginDivider() {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Divider(
-            Modifier
-                .weight(1f)
-                .background(Color(0xFFF9F9F9))
-                .height(1.dp)
-        )
+        HorizontalDivider(thickness = 1.dp, color = DividerDefaults.color, modifier = Modifier.weight(1f))
         Text(
             "OR",
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFFB5B5B5),
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Divider(
-            Modifier
-                .weight(1f)
-                .background(Color(0xFFF9F9F9))
-                .height(1.dp)
-        )
+        HorizontalDivider(thickness = 1.dp, color = DividerDefaults.color, modifier = Modifier.weight(1f))
     }
 }
 
@@ -230,14 +220,13 @@ fun Password(password: String, onPasswordChange: (String) -> Unit) {
         },
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFF3F3F3),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, Color(0xFFE5E5E5), MaterialTheme.shapes.medium)
+            .border(1.dp, MaterialTheme.colorScheme.onBackground, MaterialTheme.shapes.medium)
     )
 
 }
@@ -253,14 +242,13 @@ fun Email(email: String, onEmailChange: (String) -> Unit) {
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFF3F3F3),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, Color(0xFFE5E5E5), MaterialTheme.shapes.medium)
+            .border(1.dp, MaterialTheme.colorScheme.onBackground, MaterialTheme.shapes.medium)
     )
 }
 
@@ -269,19 +257,17 @@ fun ImageLogo() {
     Image(
         painter = painterResource(id = R.drawable.img_logo),
         contentDescription = "Logo",
-        Modifier.fillMaxWidth(),
+        Modifier.fillMaxWidth().background(Color.Transparent),
         contentScale = ContentScale.Inside
     )
 }
 
 @Composable
-fun Header(modifier: Modifier = Modifier) {
-    //val activity = LocalContext.current as Activity
-
+fun Header(modifier: Modifier = Modifier, onBackClick: () -> Unit = {}) {
     Icon(
         imageVector = Icons.Default.Close,
         contentDescription = "Close App",
-        modifier = modifier.clickable { /*activity.finish()*/ })
+        modifier = modifier.clickable { onBackClick() })
 }
 
 fun enableLogin(email: String, password: String) =

@@ -1,6 +1,5 @@
 package dev.yovany.jcudemy.ui.menu
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,23 +37,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.yovany.jcudemy.MessageView
-import dev.yovany.jcudemy.data.Menu
 import dev.yovany.jcudemy.R
-import dev.yovany.jcudemy.data.Service
 import dev.yovany.jcudemy.Utility
+import dev.yovany.jcudemy.data.Menu
 import dev.yovany.jcudemy.data.Message
 import dev.yovany.jcudemy.data.MessageType
 import dev.yovany.jcudemy.data.Resource
+import dev.yovany.jcudemy.data.Service
 
 
 @Composable
-fun MenuView(dataViewModel: DataViewModel = hiltViewModel()) {
+fun MenuView(dataViewModel: DataViewModel = hiltViewModel(), onItemClicked: (String, String, String) -> Unit = { _, _, _ -> }) {
     var showItemsView by remember { mutableStateOf(false) }
     val menu by dataViewModel.menu.collectAsState()
     var data by remember { mutableStateOf(Menu()) }
     var service by remember { mutableStateOf(Service()) }
+    var haveGottenMenu by rememberSaveable { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) { dataViewModel.getMenu() }
+    LaunchedEffect(Unit) {
+        if (haveGottenMenu) return@LaunchedEffect
+
+        dataViewModel.getMenu()
+        haveGottenMenu = true
+    }
 
     Column(Modifier.fillMaxSize()) {
         Header(title = data.title, subtitle = data.subtitle, modifier = Modifier.weight(3f))
@@ -96,7 +102,7 @@ fun MenuView(dataViewModel: DataViewModel = hiltViewModel()) {
         ItemsView(
             service = service,
             onDismiss = { showItemsView = false },
-            onItemClicked = { item -> Log.d("MenuView", "Item clicked: ${item.name}") }
+            onItemClicked = { item -> onItemClicked(service.service, item.name, item.description) }
         )
     }
 
@@ -108,7 +114,7 @@ fun Header(title: String, subtitle: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = Color(0xFF6200EE))
+            .background(color = MaterialTheme.colorScheme.primary)
             .padding(16.dp),
         contentAlignment = Alignment.BottomStart
     ) {
@@ -134,7 +140,6 @@ fun Menu(menu: Menu, modifier: Modifier = Modifier, onServiceClicked: (Service) 
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = Color.White)
             .padding(16.dp),
         columns = GridCells.Fixed(2)
     ) {
@@ -151,16 +156,15 @@ fun ServiceView(service: Service, onServiceClicked: (Service) -> Unit = {}) {
         ?: R.drawable.ic_default_service
 
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiary,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+        shape = MaterialTheme.shapes.large,
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp)
-            .clickable { onServiceClicked(service) },
-        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
-        shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(
-            contentColor = Color(0xFFFFFFFF),
-            containerColor = Color.White
-        )
+            .clickable { onServiceClicked(service) }
     ) {
 
         Column(
@@ -168,11 +172,12 @@ fun ServiceView(service: Service, onServiceClicked: (Service) -> Unit = {}) {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.tertiary)
                 .padding(16.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .size(96.dp)
+                    .size(108.dp)
                     .padding(16.dp)
                     .clip(CircleShape)
                     .background(color = color),
@@ -188,8 +193,7 @@ fun ServiceView(service: Service, onServiceClicked: (Service) -> Unit = {}) {
 
             Text(
                 text = service.service,
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.Black
+                style = MaterialTheme.typography.titleMedium
             )
         }
 

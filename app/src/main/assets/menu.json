@@ -12,7 +12,7 @@
       "items" : [
         {
           "id": 1,
-          "name": "Text - TexField",
+          "name": "Text - TextField",
           "description": "This is a description of the item"
         },
         {
@@ -32,12 +32,12 @@
         },
         {
           "id": 5,
-          "name": "Selection components",
+          "name": "Selection Control Components",
           "description": "This is a description of the item"
         },
         {
           "id": 6,
-          "name": "Other components",
+          "name": "Other Components",
           "description": "This is a description of the item"
         },
         {

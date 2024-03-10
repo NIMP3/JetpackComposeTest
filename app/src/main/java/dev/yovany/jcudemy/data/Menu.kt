@@ -22,7 +22,7 @@ data class Menu(
                         "ic_components",
                         "#FF6200EE",
                         listOf(
-                            Item(1, "Text", "A composable that displays a string of text."),
+                            Item(1, "Text - TextField", "A composable that displays a string of text."),
                             Item(2, "Button", "A composable that responds to user clicks."),
                             Item(3, "Image", "A composable that displays a drawable."),
                             Item(4, "Card", "A composable that is a container with elevation and corner radius.")

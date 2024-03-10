@@ -1,10 +1,14 @@
 package dev.yovany.jcudemy.ui.menu
 
+import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -29,11 +33,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.yovany.jcudemy.R
+import dev.yovany.jcudemy.Utility
 import dev.yovany.jcudemy.data.Item
 import dev.yovany.jcudemy.data.Menu.Companion.createSimpleMenu
-import dev.yovany.jcudemy.R
 import dev.yovany.jcudemy.data.Service
-import dev.yovany.jcudemy.Utility
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +49,7 @@ fun ItemsView(service: Service, onDismiss: () -> Unit = {}, onItemClicked: (Item
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
         sheetState = sheetState,
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.background
     ) {
         Column(
             Modifier
@@ -65,7 +69,7 @@ fun ItemsView(service: Service, onDismiss: () -> Unit = {}, onItemClicked: (Item
 
 @Composable
 fun ItemsList(itemList: List<Item>, onItemClicked: (Item) -> Unit = {}) {
-    LazyRow(Modifier.fillMaxWidth().padding(end = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    LazyRow(Modifier.fillMaxWidth().padding(end = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         items(itemList) { item ->
             ItemCard(item = item, onItemClicked = onItemClicked)
         }
@@ -75,17 +79,16 @@ fun ItemsList(itemList: List<Item>, onItemClicked: (Item) -> Unit = {}) {
 @Composable
 fun ItemCard(item: Item, onItemClicked: (Item) -> Unit = {}) {
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiary
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
+        shape = RoundedCornerShape(10),
         modifier = Modifier
             .width(120.dp)
             .padding( vertical = 12.dp)
-            .border(1.dp, Color.DarkGray, RoundedCornerShape(10))
+            .border(1.dp, MaterialTheme.colorScheme.onBackground, RoundedCornerShape(10))
             .clickable { onItemClicked(item) },
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
-        shape = RoundedCornerShape(10),
-        colors = CardDefaults.cardColors(
-            contentColor = Color(0xFFFFFFFF),
-            containerColor = Color.White
-        )
     ) {
 
         Column(
@@ -93,25 +96,29 @@ fun ItemCard(item: Item, onItemClicked: (Item) -> Unit = {}) {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.tertiary)
                 .padding(12.dp)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_default_item),
                 contentDescription = null,
-                tint = Color.DarkGray,
                 modifier = Modifier.size(48.dp),
             )
 
-            Text(
-                text = item.name,
-                style = MaterialTheme.typography.titleSmall,
-                color = Color.DarkGray,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 2,
-                minLines = 2,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 8.dp)
-            )
+            Box(
+                modifier = Modifier.height(48.dp).padding(top = 8.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = item.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 2,
+                    textAlign = TextAlign.Center
+                )
+            }
+
+
         }
 
     }

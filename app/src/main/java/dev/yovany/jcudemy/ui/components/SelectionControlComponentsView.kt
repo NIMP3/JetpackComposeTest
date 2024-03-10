@@ -183,6 +183,7 @@ fun SelectionControlComponentsView() {
     Column(
         Modifier
             .fillMaxSize()
+            .padding(16.dp)
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment . CenterHorizontally,
             verticalArrangement = Arrangement.Center

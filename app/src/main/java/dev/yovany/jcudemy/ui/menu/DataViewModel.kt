@@ -25,7 +25,7 @@ class DataViewModel @Inject constructor(@ApplicationContext private val context:
     suspend fun getMenu() {
         _menu.value = Resource.Loading()
 
-        delay(3000)
+        delay(2000)
         val jsonFileString = Utility.getJsonDataFromAsset(context,"menu.json")
         return try {
             val menu = Gson().fromJson(jsonFileString, Menu::class.java)
