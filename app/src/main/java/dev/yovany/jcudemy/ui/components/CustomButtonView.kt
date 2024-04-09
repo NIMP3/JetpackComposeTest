@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -25,6 +27,8 @@ fun CustomButtonView() {
     var enabled by rememberSaveable { mutableStateOf(true) }
     var enabledOutlineButton by rememberSaveable { mutableStateOf(true) }
     var enabledTextButton by rememberSaveable { mutableStateOf(true) }
+    var enabledFilledTonalButton by rememberSaveable { mutableStateOf(true) }
+    var enabledElevatedButton by rememberSaveable { mutableStateOf(true) }
 
     Column(
         Modifier
@@ -57,6 +61,18 @@ fun CustomButtonView() {
         }
 
         TextButton(onClick = { enabledTextButton = !enabledTextButton }, enabled = enabledTextButton) {
+            Text(text = "Click me")
+        }
+
+        FilledTonalButton(
+            onClick = { enabledFilledTonalButton = !enabledFilledTonalButton},
+            enabled = enabledFilledTonalButton) {
+            Text(text = "Click me")
+        }
+
+        ElevatedButton(
+            onClick = { enabledElevatedButton = !enabledElevatedButton },
+            enabled = enabledElevatedButton) {
             Text(text = "Click me")
         }
     }
