@@ -7,17 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import dev.yovany.jcudemy.core.Routes.*
-import dev.yovany.jcudemy.data.Item
-import dev.yovany.jcudemy.ui.components.CustomButtonView
-import dev.yovany.jcudemy.ui.components.CustomDialogView
-import dev.yovany.jcudemy.ui.components.CustomImageView
-import dev.yovany.jcudemy.ui.components.CustomProgressBarView
-import dev.yovany.jcudemy.ui.components.CustomSliderView
-import dev.yovany.jcudemy.ui.components.CustomTextAndTextFieldView
-import dev.yovany.jcudemy.ui.components.OtherComponentsView
-import dev.yovany.jcudemy.ui.components.SelectionControlComponentsView
-import dev.yovany.jcudemy.ui.instagram.LoginScreen
-import dev.yovany.jcudemy.ui.menu.DataViewModel
+import dev.yovany.jcudemy.ui.instagram.ui.LoginScreen
+import dev.yovany.jcudemy.ui.instagram.ui.LoginViewModel
 import dev.yovany.jcudemy.ui.menu.ItemDetailView
 import dev.yovany.jcudemy.ui.menu.MenuView
 
@@ -44,7 +35,7 @@ fun ContentWrapper(navigationController: NavHostController) {
                 navigationController.popBackStack()
             }
         }
-        composable(Login.route) { LoginScreen() {
+        composable(Login.route) { LoginScreen(LoginViewModel()) {
             navigationController.popBackStack()
         } }
 
