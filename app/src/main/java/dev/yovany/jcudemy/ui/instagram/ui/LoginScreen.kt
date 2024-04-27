@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -51,9 +52,15 @@ import dev.yovany.jcudemy.R
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel, onBackClick: () -> Unit = {}) {
-    Box(
-        Modifier
-            .fillMaxSize()
+    val isLoading by loginViewModel.isLoading.observeAsState(initial = false)
+
+    if (isLoading) ProgressView()
+    else LoginView(loginViewModel, onBackClick)
+}
+
+@Composable
+fun LoginView(loginViewModel: LoginViewModel, onBackClick: () -> Unit = {}) {
+    Box(Modifier.fillMaxSize()
     ) {
         Header(
             modifier = Modifier
@@ -67,6 +74,13 @@ fun LoginScreen(loginViewModel: LoginViewModel, onBackClick: () -> Unit = {}) {
             loginViewModel = loginViewModel
         )
         Footer(Modifier.align(Alignment.BottomCenter))
+    }
+}
+
+@Composable
+fun ProgressView() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
     }
 }
 
@@ -89,7 +103,7 @@ fun Body(modifier: Modifier, loginViewModel: LoginViewModel) {
         Spacer(modifier = Modifier.padding(8.dp))
         ForgotPassword(modifier = Modifier.align(Alignment.End)) {}
         Spacer(modifier = Modifier.padding(16.dp))
-        LoginButton(isLoginEnabled) {}
+        LoginButton(isLoginEnabled) { loginViewModel.onLoginSelected() }
         Spacer(modifier = Modifier.padding(16.dp))
         LoginDivider()
         Spacer(modifier = Modifier.padding(24.dp))
