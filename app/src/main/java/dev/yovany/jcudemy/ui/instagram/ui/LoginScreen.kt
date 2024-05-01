@@ -283,12 +283,3 @@ fun Header(modifier: Modifier = Modifier, onBackClick: () -> Unit = {}) {
         contentDescription = "Close App",
         modifier = modifier.clickable { onBackClick() })
 }
-
-
-
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(LoginViewModel())
-}

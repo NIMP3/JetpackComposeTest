@@ -13,7 +13,7 @@ import dev.yovany.jcudemy.ui.menu.ItemDetailView
 import dev.yovany.jcudemy.ui.menu.MenuView
 
 @Composable
-fun ContentWrapper(navigationController: NavHostController) {
+fun ContentWrapper(navigationController: NavHostController, loginViewModel: LoginViewModel) {
 
     NavHost(navController = navigationController, startDestination = Menu.route) {
         composable(Menu.route) {
@@ -35,7 +35,7 @@ fun ContentWrapper(navigationController: NavHostController) {
                 navigationController.popBackStack()
             }
         }
-        composable(Login.route) { LoginScreen(LoginViewModel()) {
+        composable(Login.route) { LoginScreen(loginViewModel) {
             navigationController.popBackStack()
         } }
 
