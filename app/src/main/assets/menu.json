@@ -143,6 +143,20 @@
           "description": "This is a description of the item"
         }
       ]
+    },
+    {
+      "id": 5,
+      "service": "Animations",
+      "description": "This is a description of the service",
+      "resource": "ic_animations",
+      "color": "#FF33FF",
+        "items" : [
+            {
+            "id": 1,
+            "name": "Basic",
+            "description": "This is a description of the item"
+            }
+        ]
     }
   ]
 }

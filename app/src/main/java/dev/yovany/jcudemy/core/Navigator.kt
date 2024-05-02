@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import dev.yovany.jcudemy.core.Routes.*
+import dev.yovany.jcudemy.ui.animations.BasicAnimationsView
 import dev.yovany.jcudemy.ui.instagram.ui.LoginScreen
 import dev.yovany.jcudemy.ui.instagram.ui.LoginViewModel
 import dev.yovany.jcudemy.ui.menu.ItemDetailView
@@ -21,6 +22,7 @@ fun ContentWrapper(navigationController: NavHostController, loginViewModel: Logi
                 when (service) {
                     "Components" -> navigationController.navigate(ItemDetail.createRoute(name, description))
                     "Instagram UI" -> navigationController.navigate(Login.route)
+                    "Animations" -> navigationController.navigate(Animations.route)
                 }
             }
         }
@@ -39,6 +41,8 @@ fun ContentWrapper(navigationController: NavHostController, loginViewModel: Logi
             navigationController.popBackStack()
         } }
 
+        composable(Animations.route) { BasicAnimationsView() }
+
     }
 }
 
@@ -48,4 +52,5 @@ sealed class Routes(val route: String) {
         fun createRoute(name: String, description: String) = "itemDetail/$name/$description"
     }
     object Login: Routes("login")
+    object Animations: Routes("animations")
 }
