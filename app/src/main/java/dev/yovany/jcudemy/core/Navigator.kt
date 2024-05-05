@@ -14,7 +14,7 @@ import dev.yovany.jcudemy.ui.menu.ItemDetailView
 import dev.yovany.jcudemy.ui.menu.MenuView
 
 @Composable
-fun ContentWrapper(navigationController: NavHostController, loginViewModel: LoginViewModel) {
+fun ContentWrapper(navigationController: NavHostController, loginViewModel: LoginViewModel, tasksViewModel: LoginViewModel) {
 
     NavHost(navController = navigationController, startDestination = Menu.route) {
         composable(Menu.route) {

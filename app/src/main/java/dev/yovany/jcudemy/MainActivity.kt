@@ -19,6 +19,8 @@ import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 class MainActivity : ComponentActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
+    private val tasksViewModel: LoginViewModel by viewModels()
+
     private lateinit var navigationController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()
                 ) {
                     navigationController = rememberNavController()
-                    ContentWrapper(navigationController, loginViewModel)
+                    ContentWrapper(navigationController, loginViewModel, tasksViewModel)
                 }
             }
         }
