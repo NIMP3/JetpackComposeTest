@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import dev.yovany.jcudemy.core.Routes.*
+import dev.yovany.jcudemy.tasks.ui.TasksScreen
+import dev.yovany.jcudemy.tasks.ui.TasksViewModel
 import dev.yovany.jcudemy.ui.animations.BasicAnimationsView
 import dev.yovany.jcudemy.ui.instagram.ui.LoginScreen
 import dev.yovany.jcudemy.ui.instagram.ui.LoginViewModel
@@ -14,7 +16,7 @@ import dev.yovany.jcudemy.ui.menu.ItemDetailView
 import dev.yovany.jcudemy.ui.menu.MenuView
 
 @Composable
-fun ContentWrapper(navigationController: NavHostController, loginViewModel: LoginViewModel, tasksViewModel: LoginViewModel) {
+fun ContentWrapper(navigationController: NavHostController, loginViewModel: LoginViewModel, tasksViewModel: TasksViewModel) {
 
     NavHost(navController = navigationController, startDestination = Menu.route) {
         composable(Menu.route) {
@@ -23,6 +25,7 @@ fun ContentWrapper(navigationController: NavHostController, loginViewModel: Logi
                     "Components" -> navigationController.navigate(ItemDetail.createRoute(name, description))
                     "Instagram UI" -> navigationController.navigate(Login.route)
                     "Animations" -> navigationController.navigate(Animations.route)
+                    "Tasks" -> navigationController.navigate(Tasks.route)
                 }
             }
         }
@@ -42,6 +45,7 @@ fun ContentWrapper(navigationController: NavHostController, loginViewModel: Logi
         } }
 
         composable(Animations.route) { BasicAnimationsView() }
+        composable(Tasks.route) { TasksScreen(tasksViewModel) }
 
     }
 }
@@ -53,4 +57,5 @@ sealed class Routes(val route: String) {
     }
     object Login: Routes("login")
     object Animations: Routes("animations")
+    object Tasks: Routes("tasks")
 }

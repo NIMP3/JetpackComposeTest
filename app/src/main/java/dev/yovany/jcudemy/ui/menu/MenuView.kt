@@ -90,7 +90,8 @@ fun MenuView(dataViewModel: DataViewModel = hiltViewModel(), onItemClicked: (Str
                 data = (menu as Resource.Success).data!!
                 Menu(menu = data, modifier = Modifier.weight(7f)) {
                     service = it
-                    showItemsView = true
+                    showItemsView = service.items.isNotEmpty()
+                    if (service.items.isEmpty()) onItemClicked(service.service, service.service, service.description)
                 }
             }
 

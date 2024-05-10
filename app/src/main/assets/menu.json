@@ -150,13 +150,20 @@
       "description": "This is a description of the service",
       "resource": "ic_animations",
       "color": "#FF33FF",
-        "items" : [
-            {
-            "id": 1,
-            "name": "Basic",
-            "description": "This is a description of the item"
-            }
-        ]
+      "items" : [
+          {
+          "id": 1,
+          "name": "Basic",
+          "description": "This is a description of the item"
+          }
+      ]
+    },
+    {
+      "id": 6,
+      "service": "Tasks",
+      "description": "This is a description of the service",
+      "resource": "ic_tasks",
+      "color": "#FFGD33"
     }
   ]
 }

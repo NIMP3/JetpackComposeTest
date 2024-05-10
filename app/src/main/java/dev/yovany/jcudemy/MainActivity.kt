@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.yovany.jcudemy.core.ContentWrapper
+import dev.yovany.jcudemy.tasks.ui.TasksViewModel
 import dev.yovany.jcudemy.ui.instagram.ui.LoginViewModel
 import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 
@@ -19,7 +20,7 @@ import dev.yovany.jcudemy.ui.theme.JCUdemyTheme
 class MainActivity : ComponentActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private val tasksViewModel: LoginViewModel by viewModels()
+    private val tasksViewModel: TasksViewModel by viewModels()
 
     private lateinit var navigationController: NavHostController
 
