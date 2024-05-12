@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -45,12 +47,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import dev.yovany.jcudemy.ui.instagram.ui.model.TaskModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
+import dev.yovany.jcudemy.MessageView
+import dev.yovany.jcudemy.data.Message
+import dev.yovany.jcudemy.data.MessageType
+import dev.yovany.jcudemy.tasks.ui.TasksUIState.*
+import dev.yovany.jcudemy.tasks.ui.model.TaskModel
 
 @Composable
 fun TasksScreen(tasksViewModel: TasksViewModel) {
     val showDialog: Boolean by tasksViewModel.showDialog.observeAsState(initial = false)
-    val tasks: List<TaskModel> = tasksViewModel.tasks
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val uiState by produceState<TasksUIState>(
+        initialValue = Loading,
+        key1 = lifecycle,
+        key2 = tasksViewModel
+    ) {
+        lifecycle.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+            tasksViewModel.uiState.collect { value = it }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -62,13 +79,31 @@ fun TasksScreen(tasksViewModel: TasksViewModel) {
             onDismiss = { tasksViewModel.onDialogClicked(false) }) { task ->
             tasksViewModel.onTaskCreated(task)
         }
-        TasksList(
-            tasks = tasks,
-            onTaskCompleted = { task -> tasksViewModel.onTaskCompleted(task) },
-            onTaskClicked = { },
-            onTaskLongPressed = {
-                tasksViewModel.onTaskRemoved(it)
-            })
+
+        when (uiState) {
+            is Loading -> {
+                MessageView(
+                    message = Message(
+                        "LOADING",
+                        "Obtaining tasks data, please wait...",
+                        MessageType.LOADING
+                    )
+                )
+            }
+
+            is Success -> {
+                TasksList(
+                    tasks = (uiState as Success).tasks,
+                    onTaskCompleted = { task -> tasksViewModel.onTaskCompleted(task) },
+                    onTaskClicked = { },
+                    onTaskLongPressed = {
+                        tasksViewModel.onTaskRemoved(it)
+                    })
+            }
+
+            is Error -> MessageView(message = (uiState as Error).message)
+        }
+
         FabDialog(modifier = Modifier.align(Alignment.BottomEnd)) {
             tasksViewModel.onDialogClicked(true)
         }
@@ -191,10 +226,4 @@ fun AddTasksDialog(show: Boolean, onDismiss: () -> Unit, onAddTask: (String) -> 
             }
         }
     }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun TasksScreenPreview() {
-    TasksScreen(TasksViewModel())
 }
